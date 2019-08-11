@@ -1,0 +1,2 @@
+# color_change_ios_to_android
+iOSで指定される0〜1の色情報をAndroidの16進数ARGBに変換します
