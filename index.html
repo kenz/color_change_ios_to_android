@@ -55,7 +55,7 @@ input:focus{border:#FFF 1px solid; background-color: #222; outline: 0;}
 			var r = toAndroid($('#r input')[0].value);
 		    	var g = toAndroid($('#g input')[0].value);
 		    	var b = toAndroid($('#b input')[0].value);
-			if($('#a')[0].value){
+			if($('#a input')[0].value){
 				$('#argb')[0].value = "#"+a+r+g+b;
 				$('#rgba')[0].value = "#"+r+g+b+a;
 			}else{
