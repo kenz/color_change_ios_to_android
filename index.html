@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="EUC-JP">
+<title>Color converter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+</head>
+<style>
+body{
+margin:0;
+color:#404040;
+}
+h1{
+margin:0;
+background-color:#444;
+color:#FFF;
+padding:8px 16px;
+}
+.description{
+font-size:80%;
+color:#606060;
+padding:16px;
+margin: 0;
+}
+h2{font-size:180%;margin-top: 8px;padding-right: 8px;padding-left: 8px;background-color: #888;color: #fff;}
+p{padding-left:16px}
+input{ margin:8px;border:1px solid #888; border-radius: 6px; text-align:right; font-size: 20px; }
+
+#ios input{margin: 0;}
+#ios {display:flex; flex-wrap:wrap; justify-content: space-around}
+h3{display:inline;margin: 8px}
+#ios h3{display:block;margin: 0}
+#ios div{text-align: center}
+#ios input{width:4rem;}
+#r h3{color:#F00}
+#g h3{color:#0F0}
+#b h3{color:#00F}
+@media (prefers-color-scheme: dark) {
+body{ background: #121212; }
+.description{ color:#aaa; }
+h2{background: #222222; }
+h3{color:#aaa}
+input{background: #000; color: #aaa;}
+input:focus{border:#FFF 1px solid; background-color: #222; outline: 0;}
+}
+</style>
+<body>
+<h1>Color converter</h1>
+<p class="description">Change the style of color to Android style or Web style (0xFF) from iOS style(0..1).</p>
+<h2>ios</h2>
+<div id="ios">
+<div id="r"><h3>R</h3><input type="number" max="1" min="0" step="0.001" id="r" /></div>
+<div id="g"><h3>G</h3><input type="number" max="1" min="0" step="0.001" id="g" /></div>
+<div id="b"><h3>B</h3><input type="number" max="1" min="0" step="0.001" id="b" /></div>
+<div id="a"><h3>A</h3><input type="number" max="1" min="0" step="0.001" id="a" /></div>
+</div>
+<h2>Android</h2>
+<div><h3>ARGB</h3><input readonly="true" id="argb"></p>
+<h2>Web</h2>
+<div><h3>RGBA</h3><input readonly="true" id="rgba"></p>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+        <script>	
+		var onIOsChangeListener = function(){
+			var a = toAndroid($('#a input')[0].value);
+			var r = toAndroid($('#r input')[0].value);
+		    	var g = toAndroid($('#g input')[0].value);
+		    	var b = toAndroid($('#b input')[0].value);
+			if($('#a')[0].value){
+				$('#argb')[0].value = "#"+a+r+g+b;
+				$('#rgba')[0].value = "#"+r+g+b+a;
+			}else{
+				$('#argb')[0].value = "#"+r+g+b;
+				$('#rgba')[0].value = "#"+r+g+b;
+			}
+		}; 
+		$('#a').keyup(onIOsChangeListener);
+		$('#r').keyup(onIOsChangeListener);
+		$('#g').keyup(onIOsChangeListener);
+		$('#b').keyup(onIOsChangeListener);
+		
+		$('#a').mouseup(onIOsChangeListener);
+		$('#r').mouseup(onIOsChangeListener);
+		$('#g').mouseup(onIOsChangeListener);
+		$('#b').mouseup(onIOsChangeListener);
+	    function toAndroid( iosValue) {
+			if(!iosValue){
+				return "00";
+			}
+			if(iosValue>1){
+				return "ff";
+			}
+			var iosValue256 = Math.round(iosValue * 255);
+			var ox = iosValue256.toString(16);
+			if(iosValue256<16){
+				return "0"+ox;
+			}
+			return ox;
+		}
+		</script>
+</body>
+</html>
+
