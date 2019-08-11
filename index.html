@@ -188,8 +188,8 @@
 		var inputR = document.getElementById('inputR');
 		var inputG = document.getElementById('inputG');
 		var inputB = document.getElementById('inputB');
-		var argb= document.getElementById('argb');
-		var rgba= document.getElementById('rgba');
+		var argb = document.getElementById('argb');
+		var rgba = document.getElementById('rgba');
 		var onIOsChangeListener = function () {
 			var a = toAndroid(inputA.value);
 			var r = toAndroid(inputR.value);
@@ -203,14 +203,19 @@
 				rgba.value = "#" + r + g + b;
 			}
 		};
-		inputA.addEventListener("keyup",onIOsChangeListener);
-		inputR.addEventListener("keyup",onIOsChangeListener);
-		inputG.addEventListener("keyup",onIOsChangeListener);
-		inputB.addEventListener("keyup",onIOsChangeListener);
-		inputA.addEventListener("mouseup",onIOsChangeListener);
-		inputR.addEventListener("mouseup",onIOsChangeListener);
-		inputG.addEventListener("mouseup",onIOsChangeListener);
-		inputB.addEventListener("mouseup",onIOsChangeListener);
+		inputA.addEventListener("keyup", onIOsChangeListener);
+		inputR.addEventListener("keyup", onIOsChangeListener);
+		inputG.addEventListener("keyup", onIOsChangeListener);
+		inputB.addEventListener("keyup", onIOsChangeListener);
+		inputA.addEventListener("mouseup", onIOsChangeListener);
+		inputR.addEventListener("mouseup", onIOsChangeListener);
+		inputG.addEventListener("mouseup", onIOsChangeListener);
+		inputB.addEventListener("mouseup", onIOsChangeListener);
+		inputA.value = "";
+		inputR.value = 0.1;
+		inputG.value = 0.1;
+		inputB.value = 0.1;
+		onIOsChangeListener();
 
 		function toAndroid(iosValue) {
 			if (!iosValue) {
